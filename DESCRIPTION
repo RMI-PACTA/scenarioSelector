@@ -11,7 +11,7 @@ Authors@R:
              role = c("cph", "fnd"),
              email = "contact@2degrees-investing.org"))
 Description: For more information visit <https://2degrees-investing.org/>.
-License: file LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
