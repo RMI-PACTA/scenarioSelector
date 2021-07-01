@@ -28,9 +28,10 @@ Install the development version of scenarioSelector from GitHub with:
 # install.packages("devtools")
 devtools::install_github("2DegreesInvesting/scenarioSelector")
 ```
-
 ## Example
 
 ```{r example}
-## TODO: Add example
+if (interactive()) {
+  scenarioSelector::run_app()
+}
 ```

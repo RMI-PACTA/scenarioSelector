@@ -25,5 +25,7 @@ devtools::install_github("2DegreesInvesting/scenarioSelector")
 ## Example
 
 ``` r
-## TODO: Add example
+if (interactive()) {
+  scenarioSelector::run_app()
+}
 ```
