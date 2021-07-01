@@ -6,25 +6,20 @@
 <!-- badges: start -->
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/scenarioSelector)](https://CRAN.R-project.org/package=scenarioSelector)
 <!-- badges: end -->
 
-The goal of EDIT-PACKAGE-NAME is to …
+The goal of scenarioSelector is to helps users find a scenairo
+interactively.
 
 ## Installation
 
-Before you install EDIT-PACKAGE-NAME you may want to:
-
--   [Try an rstudio.cloud project with this package already
-    installed](https://rstudio.cloud/project/954051).
--   [Learn how to minimize installation
-    errors](https://gist.github.com/maurolepore/a0187be9d40aee95a43f20a85f4caed6#installation).
-
-When you are ready, install the development version of EDIT-PACKAGE-NAME
-from GitHub with:
+Install the development version of scenarioSelector from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("2DegreesInvesting/EDIT-PACKAGE-NAME")
+devtools::install_github("2DegreesInvesting/scenarioSelector")
 ```
 
 ## Example

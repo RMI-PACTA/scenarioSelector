@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/scenarioSelector)](https://CRAN.R-project.org/package=scenarioSelector)
 <!-- badges: end -->
 
-The goal of scenarioSelector is to find a scenairo.
+The goal of scenarioSelector is to helps users find a scenairo interactively.
 
 ## Installation
 
