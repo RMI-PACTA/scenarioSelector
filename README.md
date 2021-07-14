@@ -8,10 +8,14 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/scenarioSelector)](https://CRAN.R-project.org/package=scenarioSelector)
+[![R-CMD-check](https://github.com/2DegreesInvesting/scenarioSelector/workflows/R-CMD-check/badge.svg)](https://github.com/2DegreesInvesting/scenarioSelector/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/2DegreesInvesting/scenarioSelector/branch/master/graph/badge.svg)](https://codecov.io/gh/2DegreesInvesting/scenarioSelector?branch=master)
 <!-- badges: end -->
 
-The goal of scenarioSelector is to helps users find a scenairo
-interactively.
+The goal of the scenarioSelector
+[app](https://twodii.shinyapps.io/scenarioSelector/) is to help you find
+and visualize a scenario.
 
 ## Installation
 

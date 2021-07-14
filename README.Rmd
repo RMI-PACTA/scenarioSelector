@@ -20,7 +20,9 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/2DegreesInvesting/scenarioSelector/branch/master/graph/badge.svg)](https://codecov.io/gh/2DegreesInvesting/scenarioSelector?branch=master)
 <!-- badges: end -->
 
-The goal of scenarioSelector is to helps users find a scenairo interactively.
+The goal of the scenarioSelector
+[app](https://twodii.shinyapps.io/scenarioSelector/) is to help you find and
+visualize a scenario.
 
 ## Installation
 
@@ -30,6 +32,7 @@ Install the development version of scenarioSelector from GitHub with:
 # install.packages("devtools")
 devtools::install_github("2DegreesInvesting/scenarioSelector")
 ```
+
 ## Example
 
 ```{r example}
