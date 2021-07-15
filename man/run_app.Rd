@@ -14,6 +14,6 @@ litigationRisk app
 }
 \examples{
 if (interactive()) {
- run_app()
+  run_app()
 }
 }
