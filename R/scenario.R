@@ -1,39 +1,42 @@
-scenarioUI <- function(id, cols) {
+scenarioUI <- function(id) {
+  regions <- unique(fake_data()$region)
   tagList(
-    lapply(cols, select_from, id),
-    plotOutput(NS(id, "tmsr"))
+    selectInput(NS(id, "region"), "Which `region`?", regions),
+    selectInput(NS(id, "nuclear"), "Has nuclear?", c("skip", "yes", "no")),
+    plotOutput(NS(id, "plot"))
   )
 }
 
 scenarioServer <- function(id) {
   moduleServer(id, function(input, output, session) {
     picked <- reactive({
-      d <- dataset()
-      d <- d[d$scenario %in% input$scenario, ]
-      d <- d[d$region %in% input$region, ]
-      d <- d[d$scenario_source %in% input$scenario_source, ]
-      d
+      out <- fake_data()
+
+      out <- out[out$region %in% input$region, ]
+
+      out <- switch(input$nuclear,
+        skip = out,
+        yes = out[out$nuclear, ],
+        no = out[!out$nuclear, ],
+        stop("Unknown input: ", input$nuclear, call. = FALSE)
+      )
+
+      out
     })
 
-    output$tmsr <- renderPlot({
-      ggplot(picked()) +
-        geom_line(aes(.data$year, .data$tmsr)) +
-        facet_wrap(vars(.data$sector, .data$technology))
+    output$plot <- renderPlot({
+      data <- picked()
+
+      ggplot(data) +
+        geom_line(aes(.data$year, .data$value)) +
+        facet_grid(.data$model ~ .data$scenario) +
+        labs(y = paste0(unique(data$variable), " [", unique(data$unit), "]"))
     })
   })
 }
 
-pickApp <- function() {
-  cols <- c("scenario", "region", "scenario_source")
-  ui <- fluidPage(scenarioUI("pick", cols))
+scenarioApp <- function() {
+  ui <- fluidPage(scenarioUI("pick"))
   server <- function(input, output, session) scenarioServer("pick")
   shinyApp(ui, server)
-}
-
-select_from <- function(name, id) {
-  val <- unique(dataset()[[name]])
-  selectInput(
-    NS(id, name), sprintf("Which `%s` would you like?", name),
-    choices = val
-  )
 }

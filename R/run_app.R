@@ -8,7 +8,7 @@
 #'   run_app()
 #' }
 run_app <- function() {
-  ui <- fluidPage(scenarioUI("id", c("scenario", "region", "scenario_source")))
+  ui <- fluidPage(scenarioUI("id"))
   server <- function(input, output, session) scenarioServer("id")
   shinyApp(ui, server)
 }
