@@ -1,31 +1,34 @@
+# Source: https://git.io/JWove
 fake_data <- function() {
-  out <- tibble::tribble(
-    ~model, ~scenario, ~region, ~variable, ~unit, ~year, ~value,
-    "model_a", "scenario_a", "region_a", "a_a|b_b", "gw", 2021L, 1,
-    "model_a", "scenario_a", "region_a", "a_a|b_b", "gw", 2022L, 2,
-    "model_a", "scenario_a", "region_a", "a_a|b_b", "gw", 2023L, 1,
-    "model_b", "scenario_a", "region_a", "a_a|b_b", "gw", 2021L, 1,
-    "model_b", "scenario_a", "region_a", "a_a|b_b", "gw", 2022L, 2,
-    "model_b", "scenario_a", "region_a", "a_a|b_b", "gw", 2023L, 2,
-    "model_b", "scenario_b", "region_a", "a_a|b_b", "gw", 2021L, 1,
-    "model_b", "scenario_b", "region_a", "a_a|b_b", "gw", 2022L, 2,
-    "model_b", "scenario_b", "region_a", "a_a|b_b", "gw", 2023L, 3,
-    "model_a", "scenario_b", "region_a", "a_a|b_b", "gw", 2021L, 1,
-    "model_a", "scenario_b", "region_a", "a_a|b_b", "gw", 2022L, 2,
-    "model_a", "scenario_b", "region_a", "a_a|b_b", "gw", 2023L, 4,
-    "model_a", "scenario_a", "region_b", "a_a|b_b", "gw", 2021L, 2,
-    "model_a", "scenario_a", "region_b", "a_a|b_b", "gw", 2022L, 2,
-    "model_a", "scenario_a", "region_b", "a_a|b_b", "gw", 2023L, 1,
-    "model_b", "scenario_a", "region_b", "a_a|b_b", "gw", 2021L, 2,
-    "model_b", "scenario_a", "region_b", "a_a|b_b", "gw", 2022L, 2,
-    "model_b", "scenario_a", "region_b", "a_a|b_b", "gw", 2023L, 2,
-    "model_b", "scenario_b", "region_b", "a_a|b_b", "gw", 2021L, 2,
-    "model_b", "scenario_b", "region_b", "a_a|b_b", "gw", 2022L, 2,
-    "model_b", "scenario_b", "region_b", "a_a|b_b", "gw", 2023L, 3,
-    "model_a", "scenario_b", "region_b", "a_a|b_b", "gw", 2021L, 2,
-    "model_a", "scenario_b", "region_b", "a_a|b_b", "gw", 2022L, 2,
-    "model_a", "scenario_b", "region_b", "a_a|b_b", "gw", 2023L, 4,
+  # styler: off
+  out1 <- tibble::tribble(
+    ~model,       ~scenario, ~year,
+    "model_a", "scenario_a", 2021L,
+    "model_a", "scenario_a", 2022L,
+    "model_a", "scenario_a", 2023L,
+
+    "model_a", "scenario_b", 2021L,
+    "model_a", "scenario_b", 2022L,
+    "model_a", "scenario_b", 2023L,
+
+    "model_b", "scenario_a", 2021L,
+    "model_b", "scenario_a", 2022L,
+    "model_b", "scenario_a", 2023L,
+
+    "model_b", "scenario_b", 2021L,
+    "model_b", "scenario_b", 2022L,
+    "model_b", "scenario_b", 2023L,
   )
+  # styler: on
+
+  out1$region <- "region_a"
+  out2 <- out1
+  out2$region <- "region_b"
+
+  out <- rbind(out1, out2)
+  out$variable <- "var_a"
+  out$unit <- "gw"
+  out$value <- runif(nrow(out))
   out$nuclear <- ifelse(out$scenario == "scenario_a", TRUE, FALSE)
   out
 }

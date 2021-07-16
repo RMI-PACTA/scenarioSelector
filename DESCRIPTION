@@ -18,6 +18,7 @@ Imports:
     ggplot2,
     r2dii.data,
     shiny,
+    stats,
     tibble
 Suggests: 
     covr,

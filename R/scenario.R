@@ -1,25 +1,45 @@
 scenarioUI <- function(id) {
+  nuclear_tabs <- tabsetPanel(
+    id = NS(id, "nuclear_question"),
+    type = "hidden",
+    tabPanel("no"),
+    tabPanel("yes", selectInput(
+      NS(id, "nuclear"),
+      "Include or exclude nuclear energy?", c("include", "exclude")
+    ))
+  )
+
   regions <- unique(fake_data()$region)
   tagList(
     selectInput(NS(id, "region"), "Which `region`?", regions),
-    selectInput(NS(id, "nuclear"), "Has nuclear?", c("skip", "yes", "no")),
+    selectInput(
+      NS(id, "consider_nuclear"), "Consider nuclear?",
+      choices = c("no", "yes"), selected = "no"
+    ),
+    nuclear_tabs,
     plotOutput(NS(id, "plot"))
   )
 }
 
 scenarioServer <- function(id) {
   moduleServer(id, function(input, output, session) {
+    observeEvent(input$consider_nuclear, {
+      updateTabsetPanel(
+        inputId = "nuclear_question", selected = input$consider_nuclear
+      )
+    })
+
     picked <- reactive({
       out <- fake_data()
 
       out <- out[out$region %in% input$region, ]
 
-      out <- switch(input$nuclear,
-        skip = out,
-        yes = out[out$nuclear, ],
-        no = out[!out$nuclear, ],
-        stop("Unknown input: ", input$nuclear, call. = FALSE)
-      )
+      if (input$consider_nuclear == "yes") {
+        out <- switch(input$nuclear,
+          include = out[out$nuclear, ],
+          exclude = out[!out$nuclear, ]
+        )
+      }
 
       out
     })
@@ -28,9 +48,17 @@ scenarioServer <- function(id) {
       data <- picked()
 
       ggplot(data) +
-        geom_line(aes(.data$year, .data$value)) +
-        facet_grid(.data$model ~ .data$scenario) +
-        labs(y = paste0(unique(data$variable), " [", unique(data$unit), "]"))
+        geom_line(
+          aes(
+            .data$year,
+            .data$value,
+            colour = interaction(.data$model, .data$scenario, sep = " + ")
+          )
+        ) +
+        labs(
+          y = paste(unique(data$variable), "[", unique(data$unit), "]"),
+          colour = "model + scenario"
+        )
     })
   })
 }
