@@ -44,17 +44,17 @@ reports.
 This tool was attempted and abandoned twice before:
 
 -   The first attempt
-    ([CapitalMarketsPlatform](https://github.com/2DegreesInvesting/CapitalMarketsPlatform);
-
-1.  was retired because it doesn’t seem to work (the questions seems to
-    not filter the data).
+    ([CapitalMarketsPlatform](https://github.com/2DegreesInvesting/CapitalMarketsPlatform),
+    [`@pranavpandya84`](https://github.com/pranavpandya84)) was retired
+    because it doesn’t seem to work (the questions seems to not filter
+    the data).
 
 -   The second attempt
-    ([r2dii.scenario.selector](https://github.com/2DegreesInvesting/r2dii.scenario.selector);
-
-2.  is a lighter version of the fist one – built from the top down. It
-    was also retired because it inherited the bugs of the first one, and
-    still has complexity that makes it hard to debug.
+    ([r2dii.scenario.selector](https://github.com/2DegreesInvesting/r2dii.scenario.selector),
+    [`@jdhoffa`](https://github.com/jdhoffa)) is a lighter version of
+    the fist one – built from the top down. It was also retired because
+    it inherited the bugs of the first one, and still has complexity
+    that makes it hard to debug.
 
 ## Criteria to select scenarios
 
