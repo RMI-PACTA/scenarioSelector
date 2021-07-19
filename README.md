@@ -33,3 +33,44 @@ if (interactive()) {
   scenarioSelector::run_app()
 }
 ```
+
+## Need
+
+We are questioning the need of this tool, based on grant proposals and
+reports.
+
+## Related work
+
+This tool was attempted and abandoned twice before:
+
+-   The first attempt
+    ([CapitalMarketsPlatform](https://github.com/2DegreesInvesting/CapitalMarketsPlatform);
+
+1.  was retired because it doesn’t seem to work (the questions seems to
+    not filter the data).
+
+-   The second attempt
+    ([r2dii.scenario.selector](https://github.com/2DegreesInvesting/r2dii.scenario.selector);
+
+2.  is a lighter version of the fist one – built from the top down. It
+    was also retired because it inherited the bugs of the first one, and
+    still has complexity that makes it hard to debug.
+
+## Criteria to select scenarios
+
+The first attempt to build this tool
+([CapitalMarketsPlatform](https://github.com/2DegreesInvesting/CapitalMarketsPlatform))
+includes a number of questions, as a criteria to pick relevant
+scenarios. Now we may either try to (a) implement those original
+questions, or (b) develop new questions.
+
+I suspect developing new questions will be easiest:
+
+-   The relevant grants seem to not commit to any specific question.
+-   The original questions
+    -   seem not obviously useful or updated, and
+    -   may be hard to translate into criteria to pick scenarios.
+-   The new questions
+    -   could be develop to be easy to implement, and
+    -   could be developed to be clearly useful with minimal input from
+        analysts.
