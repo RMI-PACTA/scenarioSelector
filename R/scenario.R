@@ -1,64 +1,64 @@
-scenarioUI <- function(id) {
-  nuclear_tabs <- tabsetPanel(
-    id = NS(id, "nuclear_question"),
-    type = "hidden",
-    tabPanel("no"),
-    tabPanel("yes", selectInput(
-      NS(id, "nuclear"),
-      "Include or exclude nuclear energy?", c("include", "exclude")
-    ))
-  )
+select_column <- function(id, name, choices, ...) {
+  selectInput(NS(id, name), glue("Which `{name}`?"), choices)
+}
 
-  regions <- unique(fake_data()$region)
+scenarioUI <- function(id) {
   tagList(
-    selectInput(NS(id, "region"), "Which `region`?", regions),
-    selectInput(
-      NS(id, "consider_nuclear"), "Consider nuclear?",
-      choices = c("no", "yes"), selected = "no"
-    ),
-    nuclear_tabs,
+    select_column(id, "region", unique(scenarioSelector::scenarios$region)),
+    select_column(id, "sector", NULL),
+    select_column(id, "variable", NULL),
     plotOutput(NS(id, "plot"))
   )
 }
 
 scenarioServer <- function(id) {
   moduleServer(id, function(input, output, session) {
-    observeEvent(input$consider_nuclear, {
-      updateTabsetPanel(
-        inputId = "nuclear_question", selected = input$consider_nuclear
-      )
+    region <- reactive({
+      scenarioSelector::scenarios %>%
+        filter(.data$region %in% input$region)
+    })
+    observeEvent(region(), {
+      choices <- unique(region()$sector)
+      updateSelectInput(inputId = "sector", choices = choices)
     })
 
-    picked <- reactive({
-      out <- fake_data()
+    sector <- reactive({
+      req(input$sector)
+      filter(region(), sector == input$sector)
+    })
+    observeEvent(sector(), {
+      choices <- unique(sector()$variable)
+      updateSelectInput(inputId = "variable", choices = choices)
+    })
 
-      out <- out[out$region %in% input$region, ]
-
-      if (input$consider_nuclear == "yes") {
-        out <- switch(input$nuclear,
-          include = out[out$nuclear, ],
-          exclude = out[!out$nuclear, ]
-        )
-      }
-
-      out
+    pick <- reactive({
+      req(input$variable)
+      filter(sector(), .data$variable == input$variable)
     })
 
     output$plot <- renderPlot({
-      data <- picked()
-
-      ggplot(data) +
+      p <- ggplot(pick()) +
         geom_line(
           aes(
             .data$year,
             .data$value,
-            colour = interaction(.data$model, .data$scenario, sep = " + ")
+            colour = interaction(.data$scenario, .data$model, sep = " | ")
           )
-        ) +
-        labs(
-          y = paste(unique(data$variable), "[", unique(data$unit), "]"),
-          colour = "model + scenario"
         )
+
+      unit <- unique(pick()$unit)
+      unit <- ifelse(!is.na(unit), glue("[{unit}]"), "")
+      y_lab <- paste(unique(input$variable), unit)
+      p <- p +
+        labs(y = y_lab, colour = "scenario | model")
+
+      has_techs <- !unique(is.na(pick()$technology))
+      # TODO: Avoid temporary error with req() or similar
+      if (has_techs) {
+        p <- p + facet_wrap(vars(.data$technology))
+      }
+
+      p
     })
   })
 }
