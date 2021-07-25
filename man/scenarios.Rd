@@ -5,21 +5,16 @@
 \alias{scenarios}
 \title{Scenario datasets}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 56680 rows and 9 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 56680 rows and 12 columns.
 }
 \usage{
 scenarios
 }
 \description{
-This dataset combines all scenarios available at \url{https://www.transitionmonitor.com/pacta-for-banks-2020/methodology-and-supporting-materials/}.
+This dataset combines all scenarios available at
+\url{https://www.transitionmonitor.com/pacta-for-banks-2020/methodology-and-supporting-materials/}.
 }
 \examples{
-library(dplyr)
-
-# There are two kinds of scenarios:
-production <- scenarios \%>\% filter(is_production(variable))
-emission_factor <- scenarios \%>\% filter(is_emission_factor(variable))
-
-production \%>\% distinct(variable, value, unit)
+scenarios
 }
 \keyword{datasets}

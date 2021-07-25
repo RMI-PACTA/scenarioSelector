@@ -1,65 +1,34 @@
-select_column <- function(id, name, choices, ...) {
-  selectInput(NS(id, name), glue("Which `{name}`?"), choices)
-}
-
 scenarioUI <- function(id) {
-  tagList(
-    select_column(id, "region", unique(scenarioSelector::scenarios$region)),
-    select_column(id, "sector", NULL),
-    select_column(id, "variable", NULL),
-    plotOutput(NS(id, "plot"))
+  selectors <- purrr::map2(
+    c("region", "sector", "target", "is_net0", "is_2dii", "variable"),
+    choices(),
+    ~ select_column(id, name = .x, choices = .y)
   )
+  tagList(strong("Select a value for each variable"), selectors)
 }
 
 scenarioServer <- function(id) {
   moduleServer(id, function(input, output, session) {
-    region <- reactive({
-      scenarioSelector::scenarios %>%
-        filter(.data$region %in% input$region)
-    })
-    observeEvent(region(), {
-      choices <- unique(region()$sector)
-      updateSelectInput(inputId = "sector", choices = choices)
-    })
+    pick_id <- function(data, id) {
+      req(input[[id]])
+      filter(data, .data[[id]] %in% input[[id]])
+    }
+    updateChoices <- function(reactive, inputId) {
+      choices <- unique(reactive[[inputId]])
+      updateSelectInput(inputId = inputId, choices = choices)
+    }
 
-    sector <- reactive({
-      req(input$sector)
-      filter(region(), sector == input$sector)
-    })
-    observeEvent(sector(), {
-      choices <- unique(sector()$variable)
-      updateSelectInput(inputId = "variable", choices = choices)
-    })
-
-    pick <- reactive({
-      req(input$variable)
-      filter(sector(), .data$variable == input$variable)
-    })
-
-    output$plot <- renderPlot({
-      p <- ggplot(pick()) +
-        geom_line(
-          aes(
-            .data$year,
-            .data$value,
-            colour = interaction(.data$scenario, .data$model, sep = " | ")
-          )
-        )
-
-      unit <- unique(pick()$unit)
-      unit <- ifelse(!is.na(unit), glue("[{unit}]"), "")
-      y_lab <- paste(unique(input$variable), unit)
-      p <- p +
-        labs(y = y_lab, colour = "scenario | model")
-
-      has_techs <- !unique(is.na(pick()$technology))
-      # TODO: Avoid temporary error with req() or similar
-      if (has_techs) {
-        p <- p + facet_wrap(vars(.data$technology))
-      }
-
-      p
-    })
+    region <- reactive(pick_id(scenarioSelector::scenarios, "region"))
+    observeEvent(region(), updateChoices(region(), "sector"))
+    sector <- reactive(pick_id(region(), "sector"))
+    observeEvent(sector(), updateChoices(sector(), "target"))
+    target <- reactive(pick_id(sector(), "target"))
+    observeEvent(target(), updateChoices(target(), "is_net0"))
+    is_net0 <- reactive(pick_id(target(), "is_net0"))
+    observeEvent(is_net0(), updateChoices(is_net0(), "is_2dii"))
+    is_2dii <- reactive(pick_id(is_net0(), "is_2dii"))
+    observeEvent(is_2dii(), updateChoices(is_2dii(), "variable"))
+    variable <- reactive(pick_id(is_2dii(), "variable"))
   })
 }
 

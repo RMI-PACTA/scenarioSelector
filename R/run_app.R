@@ -1,4 +1,4 @@
-#' litigationRisk app
+#' scenarioSelector app
 #'
 #' @return Called for its side effect.
 #' @export
@@ -8,7 +8,14 @@
 #'   run_app()
 #' }
 run_app <- function() {
-  ui <- fluidPage(scenarioUI("id"))
-  server <- function(input, output, session) scenarioServer("id")
+  ui <- fluidPage(
+    sidebarPanel(scenarioUI("id")),
+    mainPanel(plotOutput("plot"), dataTableOutput("table"))
+  )
+  server <- function(input, output, session) {
+    scenarios <- scenarioServer("id")
+    output$plot <- renderPlot(plot_scenarios(scenarios()))
+    output$table <- renderDataTable(scenarios())
+  }
   shinyApp(ui, server)
 }

@@ -26,7 +26,21 @@ scenarios <- bind_rows(emission_factor, tmsr_smsp) %>%
   rename(model = scenario, scenario = scenario_source)
 
 scenarios <- scenarios %>%
-  select(!!!scenario_columns()) %>%
-  arrange(!!!scenario_columns())
+  select(!!!basic_vars()) %>%
+  arrange(!!!basic_vars())
+
+scenarios <- scenarios %>%
+  # Avoid meaningless differences: e.g. "global" and "Global" become "global"
+  mutate(across(where(is.character), tolower)) %>%
+  # For server speed, pre-compute columns instead of computing them on the fly
+  mutate(
+    target = if_else(
+      .data$variable %in% c("smsp", "tmsr"), "production", "emission_factor"
+    ),
+    is_net0 = .data$model %in% net0(),
+    is_2dii = .data$model %in% twodii()
+  ) %>%
+  relocate(is_net0, is_2dii, .after = .data$model) %>%
+  relocate(target, .before = .data$variable)
 
 usethis::use_data(scenarios, overwrite = TRUE)

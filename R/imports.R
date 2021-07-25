@@ -2,5 +2,6 @@
 #' @import ggplot2
 #' @importFrom stats runif
 #' @importFrom glue glue
-#' @importFrom dplyr filter select
+#' @importFrom purrr map2
+#' @importFrom dplyr filter distinct pull select
 NULL

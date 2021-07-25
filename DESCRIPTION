@@ -19,9 +19,11 @@ Depends:
 Imports: 
     dplyr,
     ggplot2,
-    magrittr,
     glue,
+    magrittr,
+    purrr,
     r2dii.data,
+    rlang,
     shiny,
     stats,
     tibble
