@@ -29,11 +29,12 @@ scenarioServer <- function(id) {
     is_2dii <- reactive(pick_id(is_net0(), "is_2dii"))
     observeEvent(is_2dii(), updateChoices(is_2dii(), "variable"))
     variable <- reactive(pick_id(is_2dii(), "variable"))
+    out <- variable
   })
 }
 
 scenarioApp <- function() {
-  ui <- fluidPage(scenarioUI("pick"))
-  server <- function(input, output, session) scenarioServer("pick")
+  ui <- fluidPage(scenarioUI("id"))
+  server <- function(input, output, session) scenarioServer("id")
   shinyApp(ui, server)
 }

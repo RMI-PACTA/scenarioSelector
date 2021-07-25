@@ -1,20 +1,16 @@
 plot_scenarios <- function(data) {
-  p <- ggplot(data) +
-    geom_line(
-      aes(
-        .data$year,
-        .data$value,
-        colour = interaction(.data$scenario, .data$model, sep = " | ")
-      )
-    ) +
-    labs(y = y_lab(data), colour = "scenario | model")
-
-  has_some_technology <- !unique(is.na(data$technology))
-  if (has_some_technology) {
+  p <- plot_panel(data)
+  if (!all(is.na(data$technology))) {
     p <- p + facet_wrap(vars(.data$technology))
   }
-
   p
+}
+
+plot_panel <- function(data) {
+  scenario_model <- interaction(data$scenario, data$model, sep = " | ")
+  ggplot(data) +
+    geom_line(aes(.data$year, .data$value, colour = scenario_model)) +
+    labs(y = y_lab(data), colour = "scenario | model")
 }
 
 y_lab <- function(data) {
