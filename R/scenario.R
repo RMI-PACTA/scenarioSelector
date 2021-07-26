@@ -1,10 +1,5 @@
 scenarioUI <- function(id) {
-  selectors <- purrr::map2(
-    c("region", "sector", "target", "is_net0", "is_2dii", "variable"),
-    choices(),
-    ~ select_column(id, name = .x, choices = .y)
-  )
-  tagList(strong("Select a value for each variable"), selectors)
+  tagList(purrr::pmap(selector_arguments(), select_column, list(id)))
 }
 
 scenarioServer <- function(id) {
