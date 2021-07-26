@@ -2,9 +2,10 @@ select_column <- function(id, name, choices, label) {
   selectInput(NS(id, name), label = label, choices = choices)
 }
 
+# https://mastering-shiny.org/scaling-functions.html#ui-as-data
 # styler: off
-selector_arguments <- function() {
-  out <- tibble::tribble(
+inputs <- function(...) {
+  tribble(
          ~name,                                 ~label,
       "region",   "Which region do you want to study?",
       "sector",   "Which sector do you want to study?",
@@ -12,9 +13,8 @@ selector_arguments <- function() {
      "is_net0",              "Pick net-0 models only?",
      "is_2dii",       "Pick 2DII-aligned models only?",
     "variable", "Which variable do you want to study?",
-  )
-  out$choices <- choices()
-  out
+  ) %>%
+  bind_cols(tibble(choices = choices(), ...))
 }
 # styler: on
 

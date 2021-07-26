@@ -1,5 +1,5 @@
 scenarioUI <- function(id) {
-  tagList(purrr::pmap(selector_arguments(), select_column, list(id)))
+  tagList(pmap(inputs(id = id), select_column))
 }
 
 scenarioServer <- function(id) {
