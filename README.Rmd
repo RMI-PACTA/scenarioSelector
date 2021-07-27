@@ -55,21 +55,16 @@ Shiny, by Hadley Wickham](https://mastering-shiny.org/):
 
 * [Packages](https://mastering-shiny.org/scaling-packaging.html)
 ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/DESCRIPTION)).
-
 * [Shiny modules](https://mastering-shiny.org/scaling-modules.html)
 ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/scenario.R)).
-
 * [Testing
 reactivity](https://mastering-shiny.org/scaling-testing.html#testing-reactivity)
 ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/tests/testthat/test-scenario.R)).
-
 * [UI as data](https://mastering-shiny.org/scaling-functions.html#ui-as-data)
 ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/select_column.R)).
-
 * [Server
 functions](https://mastering-shiny.org/scaling-functions.html#server-functions)
 ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/plot_scenarios.R)).
-
 * [Hierarchical select
-boxes](https://mastering-shiny.org/action-dynamic.html?q=hiera#hierarchical-select)
+boxes](https://mastering-shiny.org/action-dynamic.html#hierarchical-select)
 ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/scenario.R)).
