@@ -14,7 +14,7 @@ scenarioServer <- function(id) {
       updateSelectInput(inputId = inputId, choices = choices)
     }
 
-    # https://mastering-shiny.org/action-dynamic.html?q=hiera#hierarchical-select
+    # https://mastering-shiny.org/action-dynamic.html#hierarchical-select
     region <- reactive(pick_id(scenarioSelector::scenarios, "region"))
     observeEvent(region(), updateChoices(region(), "sector"))
     sector <- reactive(pick_id(region(), "sector"))
