@@ -1,3 +1,4 @@
+# https://mastering-shiny.org/scaling-testing.html#testing-reactivity
 test_that("reacts to emission_factor selections", {
   testServer(scenarioServer, {
     session$setInputs(

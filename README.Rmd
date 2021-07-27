@@ -47,3 +47,29 @@ For a discussion including related work see the channel [`#
 scenario-selector-tool`](https://2investinginitiative.slack.com/archives/C025YFS5UTA)
 on 2DII's Slack or [ADO
 #552](https://dev.azure.com/2DegreesInvesting/2DegreesInvesting/_workitems/edit/552).
+
+## Learning shiny
+
+This app is small but implements some big ideas I learned from [Mastering
+Shiny, by Hadley Wickham](https://mastering-shiny.org/):
+
+* [Packages](https://mastering-shiny.org/scaling-packaging.html)
+([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/DESCRIPTION)).
+
+* [Shiny modules](https://mastering-shiny.org/scaling-modules.html)
+([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/scenario.R)).
+
+* [Testing
+reactivity](https://mastering-shiny.org/scaling-testing.html#testing-reactivity)
+([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/tests/testthat/test-scenario.R)).
+
+* [UI as data](https://mastering-shiny.org/scaling-functions.html#ui-as-data)
+([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/select_column.R)).
+
+* [Server
+functions](https://mastering-shiny.org/scaling-functions.html#server-functions)
+([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/plot_scenarios.R)).
+
+* [Hierarchical select
+boxes](https://mastering-shiny.org/action-dynamic.html?q=hiera#hierarchical-select)
+([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/scenario.R)).

@@ -1,3 +1,4 @@
+# https://mastering-shiny.org/scaling-functions.html#server-functions
 plot_scenarios <- function(data) {
   p <- plot_panel(data)
   if (!all(is.na(data$technology))) {
