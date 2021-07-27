@@ -1,5 +1,5 @@
 Package: scenarioSelector
-Title: What the Package Does (One Line, Title Case)
+Title: A Shiny App to Find a Scenario
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Mauro",
@@ -10,7 +10,7 @@ Authors@R:
       person(given = "2 Degrees Investing Initiative",
              role = c("cph", "fnd"),
              email = "contact@2degrees-investing.org"))
-Description: For more information visit <https://2degrees-investing.org/>.
+Description: A shiny app to find a scenario.
 License: MIT + file LICENSE
 URL: https://github.com/2DegreesInvesting/scenarioSelector
 BugReports: https://github.com/2DegreesInvesting/scenarioSelector/issues
