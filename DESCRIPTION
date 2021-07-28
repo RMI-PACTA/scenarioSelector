@@ -17,6 +17,7 @@ BugReports: https://github.com/2DegreesInvesting/scenarioSelector/issues
 Depends: 
     R (>= 2.10)
 Imports: 
+    bslib,
     dplyr,
     ggplot2,
     glue,
@@ -26,6 +27,7 @@ Imports:
     rlang,
     shiny,
     stats,
+    thematic,
     tibble
 Suggests: 
     covr,

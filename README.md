@@ -38,7 +38,7 @@ if (interactive()) {
 
 For a discussion including related work see the channel
 [`# scenario-selector-tool`](https://2investinginitiative.slack.com/archives/C025YFS5UTA)
-on 2DII’s Slack or [ADO
+on 2DII’s (private) Slack or [ADO
 \#552](https://dev.azure.com/2DegreesInvesting/2DegreesInvesting/_workitems/edit/552).
 
 ## Learning shiny
@@ -62,3 +62,7 @@ This app is small but implements some big ideas I learned from
 -   [Hierarchical select
     boxes](https://mastering-shiny.org/action-dynamic.html#hierarchical-select)
     ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/scenario.R)).
+-   [Plots](https://mastering-shiny.org/basic-ui.html#plots)
+    ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/utils.R)).
+-   [Themes](https://mastering-shiny.org/action-layout.html#themes)
+    ([code](https://github.com/2DegreesInvesting/scenarioSelector/blob/master/R/theme_2dii.R)).
