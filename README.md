@@ -13,9 +13,9 @@ status](https://www.r-pkg.org/badges/version/scenarioSelector)](https://CRAN.R-p
 coverage](https://codecov.io/gh/2DegreesInvesting/scenarioSelector/branch/master/graph/badge.svg)](https://codecov.io/gh/2DegreesInvesting/scenarioSelector?branch=master)
 <!-- badges: end -->
 
-The goal of the scenarioSelector
-[app](https://twodii.shinyapps.io/scenarioSelector/) is to help you find
-and visualize a scenario.
+The scenarioSelector app helps you find and visualize a scenario. You
+can use it [online](https://twodii.shinyapps.io/scenarioSelector/) or as
+an R package following the installation and example below.
 
 ## Installation
 
@@ -28,11 +28,42 @@ devtools::install_github("2DegreesInvesting/scenarioSelector")
 
 ## Example
 
+Use the scenarioSelector package with:
+
+``` r
+library(scenarioSelector)
+```
+
+You can run the app with:
+
 ``` r
 if (interactive()) {
-  scenarioSelector::run_app()
+  run_app()
 }
 ```
+
+The tidy data is available with:
+
+``` r
+scenarios
+#> # A tibble: 56,680 × 12
+#>    scenario model is_net0 is_2dii region  year sector technology target variable
+#>    <chr>    <chr> <lgl>   <lgl>   <chr>  <dbl> <chr>  <chr>      <chr>  <chr>   
+#>  1 etp_2017 2ds   FALSE   TRUE    global  2020 autom… electric   produ… smsp    
+#>  2 etp_2017 2ds   FALSE   TRUE    global  2020 autom… electric   produ… tmsr    
+#>  3 etp_2017 2ds   FALSE   TRUE    global  2020 autom… hybrid     produ… smsp    
+#>  4 etp_2017 2ds   FALSE   TRUE    global  2020 autom… hybrid     produ… tmsr    
+#>  5 etp_2017 2ds   FALSE   TRUE    global  2020 autom… ice        produ… smsp    
+#>  6 etp_2017 2ds   FALSE   TRUE    global  2020 autom… ice        produ… tmsr    
+#>  7 etp_2017 2ds   FALSE   TRUE    global  2021 autom… electric   produ… smsp    
+#>  8 etp_2017 2ds   FALSE   TRUE    global  2021 autom… electric   produ… tmsr    
+#>  9 etp_2017 2ds   FALSE   TRUE    global  2021 autom… hybrid     produ… smsp    
+#> 10 etp_2017 2ds   FALSE   TRUE    global  2021 autom… hybrid     produ… tmsr    
+#> # … with 56,670 more rows, and 2 more variables: value <dbl>, unit <chr>
+```
+
+To track the source of the data see
+[data-raw/](https://github.com/2DegreesInvesting/scenarioSelector/tree/master/data-raw).
 
 ## Discussion
 

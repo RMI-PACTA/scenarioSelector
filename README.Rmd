@@ -20,9 +20,9 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/2DegreesInvesting/scenarioSelector/branch/master/graph/badge.svg)](https://codecov.io/gh/2DegreesInvesting/scenarioSelector?branch=master)
 <!-- badges: end -->
 
-The goal of the scenarioSelector
-[app](https://twodii.shinyapps.io/scenarioSelector/) is to help you find and
-visualize a scenario.
+The scenarioSelector app helps you find and visualize a scenario. You can use it
+[online](https://twodii.shinyapps.io/scenarioSelector/) or as an R package
+following the installation and example below.
 
 ## Installation
 
@@ -35,11 +35,28 @@ devtools::install_github("2DegreesInvesting/scenarioSelector")
 
 ## Example
 
+Use the scenarioSelector package with:
+
+```{r}
+library(scenarioSelector)
+```
+
+You can run the app with:
+
 ```{r example}
 if (interactive()) {
-  scenarioSelector::run_app()
+  run_app()
 }
 ```
+
+The tidy data is available with:
+
+```{r}
+scenarios
+```
+
+To track the source of the data see
+[data-raw/](https://github.com/2DegreesInvesting/scenarioSelector/tree/master/data-raw).
 
 ## Discussion
 
